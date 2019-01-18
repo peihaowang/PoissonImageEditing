@@ -83,7 +83,7 @@ add_executable(POISSON_IMAGE_EDIT
 )
 
 set_target_properties(POISSON_IMAGE_EDIT PROPERTIES OUTPUT_NAME PoissonImageEdit)
-set_target_properties(POISSON_IMAGE_EDIT PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
+set_target_properties(POISSON_IMAGE_EDIT PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 
 # The modules should placed in specified order because of the interdependencies
 target_link_libraries(POISSON_IMAGE_EDIT
