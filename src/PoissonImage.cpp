@@ -2,6 +2,21 @@
 #include <time.h>
 #include "PoissonImage.h"
 
+class PI_LOCAL StopWatch
+{
+private:
+    clock_t         m_startTime;
+public:
+    StopWatch() : m_startTime(std::clock()) { return; }
+    void tick(const char* title)
+    {
+        std::cout << title << ": " << (double)(std::clock() - m_startTime) / CLOCKS_PER_SEC << "s" << std::endl;
+        m_startTime = std::clock();
+    }
+};
+
+///////////////////////////////////////////////////////////////////////////////
+
 PoissonImage::PoissonImage(GradientScheme gradientSchm, DiffOp gradientOp, DiffOp divOp)
     : m_gradientScheme(gradientSchm)
     , m_gradientOperator(gradientOp)
@@ -251,9 +266,6 @@ void PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::Inp
     dstMat = makeContinuous(dstMat);
     maskMat = makeContinuous(maskMat);
 
-//    cv::imwrite("tests/new_src.jpg", srcMat);
-//    cv::imwrite("tests/new_mask.jpg", maskMat);
-
     // Initialize eigen matrices
     m_srcImage = std::move(Eigen::MatrixXf(m_width * m_height, src.channels()));
     m_dstImage = std::move(Eigen::MatrixXf(m_width * m_height, dst.channels()));
@@ -304,16 +316,7 @@ void PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::Inp
             }
             break;
     }
-//    {
-//        cv::Mat gradientX;
-//        eigenMat2CvMat(m_gradientX, gradientX);
-//        cv::imwrite("tests/gradient_x.jpg", gradientX);
-//    }
-//    {
-//        cv::Mat gradientY;
-//        eigenMat2CvMat(m_gradientY, gradientY);
-//        cv::imwrite("tests/gradient_y.jpg", gradientY);
-//    }
+
     timer.tick("Calculate Gradient");
 
     Eigen::MatrixXf R;

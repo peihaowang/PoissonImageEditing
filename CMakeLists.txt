@@ -77,15 +77,5 @@ set(3RDPARTY_LIBRARIES
 # Specify the directories to headers
 include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/src ${3RDPARTY_INCLUDE_DIRS})
 
-add_executable(POISSON_IMAGE_EDIT
-    src/main.cpp
-    src/PoissonImage.cpp
-)
-
-set_target_properties(POISSON_IMAGE_EDIT PROPERTIES OUTPUT_NAME PoissonImageEdit)
-set_target_properties(POISSON_IMAGE_EDIT PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
-
-# The modules should placed in specified order because of the interdependencies
-target_link_libraries(POISSON_IMAGE_EDIT
-	${3RDPARTY_LIBRARIES}
-)
+add_subdirectory(src)
+add_subdirectory(sample)

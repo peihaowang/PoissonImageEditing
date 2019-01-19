@@ -9,24 +9,9 @@
 #include <Eigen/Core>
 #include <Eigen/Sparse>
 
+#include "Config.h"
 
-class StopWatch
-{
-private:
-    clock_t         m_startTime;
-public:
-    StopWatch() : m_startTime(std::clock()) { return; }
-    void tick(const char* title)
-    {
-        std::cout << title << ": " << (double)(std::clock() - m_startTime) / CLOCKS_PER_SEC << "s" << std::endl;
-        m_startTime = std::clock();
-    }
-};
-
-
-///////////////////////////////////////////////////////////////////////////////
-
-class PoissonImage
+class PI_API PoissonImage
 {
 
 public:
@@ -67,23 +52,22 @@ protected:
 
 protected:
 
-    cv::Mat makeContinuous(const cv::Mat& m) const;
+    PI_LOCAL cv::Mat makeContinuous(const cv::Mat& m) const;
 
     template<typename T, int RowNum, int ColNum>
-    void cvMat2EigenMat(const cv::Mat& cvMat, Eigen::Matrix<T, RowNum, ColNum>& eigenMat);
+    PI_LOCAL void cvMat2EigenMat(const cv::Mat& cvMat, Eigen::Matrix<T, RowNum, ColNum>& eigenMat);
     template<typename T, int RowNum, int ColNum>
-    void eigenMat2CvMat(const Eigen::Matrix<T, RowNum, ColNum>& eigenMat, cv::Mat& cvMat);
+    PI_LOCAL void eigenMat2CvMat(const Eigen::Matrix<T, RowNum, ColNum>& eigenMat, cv::Mat& cvMat);
 
-    inline int _idx(int x, int y) const { return x * m_height + y; }
-    inline bool isOnEdge(int x, int y) const;
+    PI_LOCAL inline int _idx(int x, int y) const { return x * m_height + y; }
 
-    void laplacianOperator(Eigen::SparseMatrix<float, Eigen::RowMajor>& L) const;
-    void projectionMask(Eigen::SparseMatrix<float, Eigen::RowMajor>& M) const;
-    void projectionEdge(Eigen::SparseMatrix<float, Eigen::RowMajor>& E) const;
-    void projectionSimpler(Eigen::SparseMatrix<float, Eigen::RowMajor>& S) const;
-    void diffOperator(Eigen::SparseMatrix<float, Eigen::RowMajor>& Dx, Eigen::SparseMatrix<float, Eigen::RowMajor>& Dy, DiffOp op) const;
+    PI_LOCAL void laplacianOperator(Eigen::SparseMatrix<float, Eigen::RowMajor>& L) const;
+    PI_LOCAL void projectionMask(Eigen::SparseMatrix<float, Eigen::RowMajor>& M) const;
+    PI_LOCAL void projectionEdge(Eigen::SparseMatrix<float, Eigen::RowMajor>& E) const;
+    PI_LOCAL void projectionSimpler(Eigen::SparseMatrix<float, Eigen::RowMajor>& S) const;
+    PI_LOCAL void diffOperator(Eigen::SparseMatrix<float, Eigen::RowMajor>& Dx, Eigen::SparseMatrix<float, Eigen::RowMajor>& Dy, DiffOp op) const;
 
-    void poissonSolver(Eigen::MatrixXf& R, bool wholeSpace = false) const;
+    PI_LOCAL void poissonSolver(Eigen::MatrixXf& R, bool wholeSpace = false) const;
 
 public:
 
