@@ -1,17 +1,13 @@
 
-#include <opencv2/photo.hpp>
-#include <opencv2/imgproc.hpp>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/core.hpp>
+#ifndef POISSON_IMAGE_H
+#define POISSON_IMAGE_H
+
 #include <opencv2/opencv.hpp>
 
 #include <Eigen/Core>
 #include <Eigen/Sparse>
 
-#include "Config.h"
-
-class PI_API PoissonImage
+class PoissonImage
 {
 
 public:
@@ -52,22 +48,22 @@ protected:
 
 protected:
 
-    PI_LOCAL cv::Mat makeContinuous(const cv::Mat& m) const;
+    cv::Mat makeContinuous(const cv::Mat& m) const;
 
     template<typename T, int RowNum, int ColNum>
-    PI_LOCAL void cvMat2EigenMat(const cv::Mat& cvMat, Eigen::Matrix<T, RowNum, ColNum>& eigenMat);
+    void cvMat2EigenMat(const cv::Mat& cvMat, Eigen::Matrix<T, RowNum, ColNum>& eigenMat);
     template<typename T, int RowNum, int ColNum>
-    PI_LOCAL void eigenMat2CvMat(const Eigen::Matrix<T, RowNum, ColNum>& eigenMat, cv::Mat& cvMat);
+    void eigenMat2CvMat(const Eigen::Matrix<T, RowNum, ColNum>& eigenMat, cv::Mat& cvMat);
 
-    PI_LOCAL inline int _idx(int x, int y) const { return x * m_height + y; }
+    inline int _idx(int x, int y) const { return x * m_height + y; }
 
-    PI_LOCAL void laplacianOperator(Eigen::SparseMatrix<float, Eigen::RowMajor>& L) const;
-    PI_LOCAL void projectionMask(Eigen::SparseMatrix<float, Eigen::RowMajor>& M) const;
-    PI_LOCAL void projectionEdge(Eigen::SparseMatrix<float, Eigen::RowMajor>& E) const;
-    PI_LOCAL void projectionSimpler(Eigen::SparseMatrix<float, Eigen::RowMajor>& S) const;
-    PI_LOCAL void diffOperator(Eigen::SparseMatrix<float, Eigen::RowMajor>& Dx, Eigen::SparseMatrix<float, Eigen::RowMajor>& Dy, DiffOp op) const;
+    void laplacianOperator(Eigen::SparseMatrix<float, Eigen::RowMajor>& L) const;
+    void projectionMask(Eigen::SparseMatrix<float, Eigen::RowMajor>& M) const;
+    void projectionEdge(Eigen::SparseMatrix<float, Eigen::RowMajor>& E) const;
+    void projectionSimpler(Eigen::SparseMatrix<float, Eigen::RowMajor>& S) const;
+    void diffOperator(Eigen::SparseMatrix<float, Eigen::RowMajor>& Dx, Eigen::SparseMatrix<float, Eigen::RowMajor>& Dy, DiffOp op) const;
 
-    PI_LOCAL void poissonSolver(Eigen::MatrixXf& R, bool wholeSpace = false) const;
+    void poissonSolver(Eigen::MatrixXf& R, bool wholeSpace = false) const;
 
 public:
 
@@ -77,3 +73,5 @@ public:
     void seamlessClone(cv::InputArray src, cv::InputArray dst, cv::InputArray mask, const cv::Point& offset, cv::OutputArray output);
 
 };
+
+#endif // POISSON_IMAGE_H

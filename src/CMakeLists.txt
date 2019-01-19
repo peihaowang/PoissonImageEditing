@@ -1,6 +1,4 @@
 
-add_definitions(-DPI_DLL)
-
 add_library(POISSON_IMAGE_SHARED
 	SHARED
     PoissonImage.cpp

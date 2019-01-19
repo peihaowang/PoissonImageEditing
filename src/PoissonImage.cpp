@@ -1,21 +1,7 @@
 
 #include <time.h>
+#include "StopWatch.h"
 #include "PoissonImage.h"
-
-class PI_LOCAL StopWatch
-{
-private:
-    clock_t         m_startTime;
-public:
-    StopWatch() : m_startTime(std::clock()) { return; }
-    void tick(const char* title)
-    {
-        std::cout << title << ": " << (double)(std::clock() - m_startTime) / CLOCKS_PER_SEC << "s" << std::endl;
-        m_startTime = std::clock();
-    }
-};
-
-///////////////////////////////////////////////////////////////////////////////
 
 PoissonImage::PoissonImage(GradientScheme gradientSchm, DiffOp gradientOp, DiffOp divOp)
     : m_gradientScheme(gradientSchm)
