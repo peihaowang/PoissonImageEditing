@@ -8,7 +8,7 @@ In *PoissonImageEditing*, images are initially loaded and processed with `cv::Ma
 
 The following illustrations may give you an intuitive idea about Poisson image editing:
 
-| Naive | Poisson ||
+| Naive | Poisson |
 |:--------------:|:--------------:|
 | ![Naive](/showcases/case0/naive.jpg?raw=true) | ![Poisson](/showcases/case0/result.png?raw=true) |
 
@@ -18,15 +18,15 @@ Methods based on the manipulation of image gradients are a powerful tool for pro
 
 The idea proposed by P'erez et al. in 2003 mainly tells about an image processing techniques working on a gradient domain, taking advantage in simplicity and efficiency. Poisson editing theory plays a significant role in image combination algorithm, which is presented as follows:
 
-\[
+$$
 \min _{f} \iint_{\Omega} {\lvert \nabla f - v \rvert}^2 \ s.t.\ f \vert_{\partial \Omega} = f* \vert_{\partial \Omega}
-\]
+$$
 
 where $\Omega$ is the target region, $\partial \Omega$ denotes the boundaries between the source and target regions. $f*$ is the already known function that exists in the whole domain (i.e. the background), while $f$ is defined as the unknown function on region $\Omega$. The solution of the equation must satisfy Euler-Largrange equation:
 
-\[
+$$
 \triangle f(x) = div(\textbf{v}(x)) \forall x \in \Omega, f \vert_{\partial \Omega} = f* \vert_{\partial \Omega}
-\]
+$$
 
 where $div(\textbf{v}) = \partial v / \partial x + \partial v / \partial y$, which we usually take the discrete differential on the gradient field, and $\triangle$ is Laplacian operator in discrete case:
 
