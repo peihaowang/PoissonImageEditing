@@ -67,12 +67,15 @@ protected:
 
 protected:
 
-    inline int _idx(int x, int y) const { return x * m_height + y; }
     cv::Mat makeContinuous(const cv::Mat& m) const;
+
     template<typename T, int RowNum, int ColNum>
     void cvMat2EigenMat(const cv::Mat& cvMat, Eigen::Matrix<T, RowNum, ColNum>& eigenMat);
     template<typename T, int RowNum, int ColNum>
     void eigenMat2CvMat(const Eigen::Matrix<T, RowNum, ColNum>& eigenMat, cv::Mat& cvMat);
+
+    inline int _idx(int x, int y) const { return x * m_height + y; }
+    inline bool isOnEdge(int x, int y) const;
 
     void laplacianOperator(Eigen::SparseMatrix<float, Eigen::RowMajor>& L) const;
     void projectionMask(Eigen::SparseMatrix<float, Eigen::RowMajor>& M) const;

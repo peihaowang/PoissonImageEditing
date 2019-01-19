@@ -131,17 +131,22 @@ void PoissonImage::diffOperator(Eigen::SparseMatrix<float, Eigen::RowMajor>& Dx,
     for(int x = 0; x < m_width; x++){
         for(int y = 0; y < m_height; y++){
             {
-                if(x == 0 || x == m_width - 1) continue;
                 switch(op){
                     case DiffOp::Backward:
+                        if(x == 0) continue;
+                        if(m_maskMap[_idx(x-1, y)] == 0) continue;
                         m1.insert(_idx(x, y), _idx(x, y)) = 1;
                         m1.insert(_idx(x, y), _idx(x-1, y)) = -1;
                         break;
                     case DiffOp::Forward:
+                        if(x == m_width - 1) continue;
+                        if(m_maskMap[_idx(x+1, y)] == 0) continue;
                         m1.insert(_idx(x, y), _idx(x+1, y)) = 1;
                         m1.insert(_idx(x, y), _idx(x, y)) = -1;
                         break;
                     case DiffOp::Centered:
+                        if(x == 0 || x == m_width - 1) continue;
+                        if(m_maskMap[_idx(x-1, y)] == 0 || m_maskMap[_idx(x+1, y)] == 0) continue;
                         m1.insert(_idx(x, y), _idx(x+1, y)) = 0.5;
                         m1.insert(_idx(x, y), _idx(x-1, y)) = -0.5;
                         break;
@@ -152,17 +157,22 @@ void PoissonImage::diffOperator(Eigen::SparseMatrix<float, Eigen::RowMajor>& Dx,
             }
 
             {
-                if(y == 0 || y == m_height - 1) continue;
                 switch(op){
                     case DiffOp::Backward:
+                        if(y == 0) continue;
+                        if(m_maskMap[_idx(x, y-1)] == 0) continue;
                         m2.insert(_idx(x, y), _idx(x, y)) = 1;
                         m2.insert(_idx(x, y), _idx(x, y-1)) = -1;
                         break;
                     case DiffOp::Forward:
+                        if(y == m_height - 1) continue;
+                        if(m_maskMap[_idx(x, y+1)] == 0) continue;
                         m2.insert(_idx(x, y), _idx(x, y+1)) = 1;
                         m2.insert(_idx(x, y), _idx(x, y)) = -1;
                         break;
                     case DiffOp::Centered:
+                        if(y == 0 || y == m_height - 1) continue;
+                        if(m_maskMap[_idx(x, y-1)] == 0 || m_maskMap[_idx(x, y+1)] == 0) continue;
                         m2.insert(_idx(x, y), _idx(x, y+1)) = 0.5;
                         m2.insert(_idx(x, y), _idx(x, y-1)) = -0.5;
                         break;
@@ -241,6 +251,9 @@ void PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::Inp
     dstMat = makeContinuous(dstMat);
     maskMat = makeContinuous(maskMat);
 
+//    cv::imwrite("tests/new_src.jpg", srcMat);
+//    cv::imwrite("tests/new_mask.jpg", maskMat);
+
     // Initialize eigen matrices
     m_srcImage = std::move(Eigen::MatrixXf(m_width * m_height, src.channels()));
     m_dstImage = std::move(Eigen::MatrixXf(m_width * m_height, dst.channels()));
@@ -291,7 +304,16 @@ void PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::Inp
             }
             break;
     }
-
+//    {
+//        cv::Mat gradientX;
+//        eigenMat2CvMat(m_gradientX, gradientX);
+//        cv::imwrite("tests/gradient_x.jpg", gradientX);
+//    }
+//    {
+//        cv::Mat gradientY;
+//        eigenMat2CvMat(m_gradientY, gradientY);
+//        cv::imwrite("tests/gradient_y.jpg", gradientY);
+//    }
     timer.tick("Calculate Gradient");
 
     Eigen::MatrixXf R;
