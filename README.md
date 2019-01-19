@@ -2,7 +2,7 @@
 
 ## Introduction
 
-*PoissonImageEditing* implements a series image processing algorithms based by Poisson editing theory, basically involves image seamless clone with two images and an arbitrary mask. Shared and static libraries are both provided along with an example program, which could be played around as an image blender.
+*PoissonImageEditing* implements a series of image processing algorithms based on Poisson editing theory, basically involves image seamless clone with two images as well as an arbitrary mask. Shared and static libraries are both provided along with an example program, which could be played around as an image blender.
 
 In *PoissonImageEditing*, images are initially loaded and processed with `cv::Mat`, and subsequently converted into matrix representation in `Eigen3`, which takes over all linear algebra computing and equation solving.
 
