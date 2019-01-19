@@ -79,14 +79,3 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/src 
 
 add_subdirectory(src)
 add_subdirectory(sample)
-
-# Installation
-
-install(TARGETS POISSON_IMAGE_SHARED POISSON_IMAGE_STATIC POISSON_IMAGE_EXE
-    RUNTIME DESTINATION bin
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-)
-
-file(GLOB PATH_HEADER_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/PoissonImage.h")
-install(FILES ${PATH_HEADER_FILES} DESTINATION include)
