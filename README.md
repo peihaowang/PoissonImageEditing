@@ -24,7 +24,7 @@ The idea proposed by P'erez et al. in 2003 mainly tells about an image processin
 
 ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5Cmin%20_%7Bf%7D%20%5Ciint_%7B%5COmega%7D%20%7B%5Clvert%20%5Cnabla%20f%20-%20v%20%5Crvert%7D%5E2%20%5C%20s.t.%5C%20f%20%5Cvert_%7B%5Cpartial%20%5COmega%7D%20%3D%20f*%20%5Cvert_%7B%5Cpartial%20%5COmega%7D)
 
-where <!--$\Omega$--> ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5COmega) is the target region, <!-- $\partial \Omega$ --> ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5Cpartial%20%5COmega) denotes the boundaries between the source and target regions. $f*$ is the already known function that exists in the whole domain (i.e. the background), while $f$ is defined as the unknown function on region ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5COmega). The solution of the equation must satisfy Euler-Largrange equation:
+where ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5COmega) is the target region, ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5Cpartial%20%5COmega) denotes the boundaries between the source and target regions. ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20f*) is the already known function that exists in the whole domain (i.e. the background), while ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20f) is defined as the unknown function on region ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5COmega). The solution of the equation must satisfy Euler-Largrange equation:
 
 <!-- \[
 \triangle f(x) = div(\textbf{v}(x)) \forall x \in \Omega, f \vert_{\partial \Omega} = f* \vert_{\partial \Omega}
@@ -32,7 +32,7 @@ where <!--$\Omega$--> ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%2
 
 ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5Ctriangle%20f%28x%29%20%3D%20div%28%5Ctextbf%7Bv%7D%28x%29%29%20%5Cforall%20x%20%5Cin%20%5COmega%2C%20f%20%5Cvert_%7B%5Cpartial%20%5COmega%7D%20%3D%20f*%20%5Cvert_%7B%5Cpartial%20%5COmega%7D)
 
-where ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20div%28%5Ctextbf%7Bv%7D%29%20%3D%20%5Cpartial%20v%20/%20%5Cpartial%20x%20&plus;%20%5Cpartial%20v%20/%20%5Cpartial%20y) <!--$div(\textbf{v}) = \partial v / \partial x + \partial v / \partial y$-->, which we usually take the discrete differential on the gradient field, and <!-- $\triangle$ --> ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5Ctriangle) is Laplacian operator in discrete case:
+where ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20div%28%5Ctextbf%7Bv%7D%29%20%3D%20%5Cpartial%20v%20/%20%5Cpartial%20x%20&plus;%20%5Cpartial%20v%20/%20%5Cpartial%20y) <!--$div(\textbf{v}) = \partial v / \partial x + \partial v / \partial y$-->, which we usually take the discrete differential on the gradient field, and  ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5Ctriangle) is Laplacian operator in discrete case:
 
 <!-- \[
 \mathcal{L}_z = \partial^2Z / \partial x^2 + \partial^2Z / \partial y^2 = -4Z_{x,y} + Z_{x+1,y} + Z_{x-1,y} + Z_{x,y+1} + Z_{x,y-1}
