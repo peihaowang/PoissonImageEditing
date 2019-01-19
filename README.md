@@ -40,7 +40,7 @@ where ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20div%28%5Ctextbf
 
 ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5Cmathcal%7BL%7D_z%20%3D%20%5Cpartial%5E2Z%20/%20%5Cpartial%20x%5E2%20&plus;%20%5Cpartial%5E2Z%20/%20%5Cpartial%20y%5E2%20%3D%20-4Z_%7Bx%2Cy%7D%20&plus;%20Z_%7Bx&plus;1%2Cy%7D%20&plus;%20Z_%7Bx-1%2Cy%7D%20&plus;%20Z_%7Bx%2Cy&plus;1%7D%20&plus;%20Z_%7Bx%2Cy-1%7D)
 
-Apply Laplacian operator and differential operator over the unknown domain $\Omega$ and solve the linear equation with matrices to obtain the numerical solutions. More details are presented in the references.
+Apply Laplacian operator and differential operator over the unknown domain ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5COmega) and solve the linear equation with matrices to obtain the numerical solutions. More details are presented in the references.
 
 ## Installation
 
