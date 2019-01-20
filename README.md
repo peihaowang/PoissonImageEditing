@@ -22,15 +22,15 @@ The idea proposed by P'erez et al. in 2003 mainly tells about an image processin
 \min _{f} \iint_{\Omega} {\lvert \nabla f - \textbf{v} \rvert}^2 \ s.t.\ f \vert_{\partial \Omega} = f* \vert_{\partial \Omega}
 \] -->
 
-![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5Cmin%20_%7Bf%7D%20%5Ciint_%7B%5COmega%7D%20%7B%5Clvert%20%5Cnabla%20f%20-%20%5Ctextbf%7Bv%7D%20%5Crvert%7D%5E2%20%5C%20s.t.%5C%20f%20%5Cvert_%7B%5Cpartial%20%5COmega%7D%20%3D%20f*%20%5Cvert_%7B%5Cpartial%20%5COmega%7D)
+![](https://latex.codecogs.com/svg.latex?%5Cmin%20_%7Bf%7D%20%5Ciint_%7B%5COmega%7D%20%7B%5Clvert%20%5Cnabla%20f%20-%20%5Ctextbf%7Bv%7D%20%5Crvert%7D%5E2%20%5C%20with%5C%20f%20%5Cvert_%7B%5Cpartial%20%5COmega%7D%20%3D%20f%5E*%20%5Cvert_%7B%5Cpartial%20%5COmega%7D)
 
 where Ω is the target region, ∂Ω denotes the boundaries between the source and target regions. *f\** is the already known function that exists in the whole domain (i.e. the background), while *f* is defined as the unknown function on region Ω. The solution of the equation must satisfy Euler-Largrange equation:
 
 <!-- \[
-\triangle f(x) = div(\textbf{v}(x)), x \in \Omega  \hspace{0.5em} with \ f \vert_{\partial \Omega} = f* \vert_{\partial \Omega}
+\triangle f(x) = div(\textbf{v}(x)), x \in \Omega  \hspace{0.5em} with \ f \vert_{\partial \Omega} = f^* \vert_{\partial \Omega}
 \] -->
 
-![](https://latex.codecogs.com/svg.latex?%5Ctriangle%20f%28x%29%20%3D%20div%28%5Ctextbf%7Bv%7D%28x%29%29%2C%20x%20%5Cin%20%5COmega%20%5Chspace%7B0.5em%7D%20with%20%5C%20f%20%5Cvert_%7B%5Cpartial%20%5COmega%7D%20%3D%20f*%20%5Cvert_%7B%5Cpartial%20%5COmega%7D)
+![](https://latex.codecogs.com/svg.latex?%5Ctriangle%20f%28x%29%20%3D%20div%28%5Ctextbf%7Bv%7D%28x%29%29%2C%20x%20%5Cin%20%5COmega%20%5Chspace%7B0.5em%7D%20with%20%5C%20f%20%5Cvert_%7B%5Cpartial%20%5COmega%7D%20%3D%20f%5E*%20%5Cvert_%7B%5Cpartial%20%5COmega%7D)
 
 where div(**v**) = ∂**v**/∂x + ∂**v**/∂y, of which we usually take the discrete differential form on the gradient field, and ▵ is Laplacian operator in discrete case:
 
