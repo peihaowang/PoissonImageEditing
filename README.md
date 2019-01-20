@@ -11,8 +11,8 @@ The following illustrations may give you an intuitive idea about Poisson image e
 | Naive | Poisson |
 |:--------------:|:--------------:|
 | ![Naive](/showcases/case0/naive.jpg?raw=true) | ![Poisson](/showcases/case0/result.png?raw=true) |
+| ![Naive](/showcases/case1/naive.jpg?raw=true) | ![Poisson](/showcases/case1/result.jpg?raw=true) |
 | ![Naive](/showcases/case2/naive.jpg?raw=true) | ![Poisson](/showcases/case2/result.jpg?raw=true) |
-| ![Naive](/showcases/case3/naive.jpg?raw=true) | ![Poisson](/showcases/case3/result.jpg?raw=true) |
 
 ## Theory
 
@@ -75,7 +75,7 @@ Here are some troubleshoots you may need to pay attention:
 
 ### Library
 
-*PoissonImageEditing* is deployed under `LGPL` license, and can be used as both shared and static libraries. After building and installing *PoissonImageEditing*, you can include the header `PoissonImage.h` and link binary files in your own project. The basic usages of provided APIs are presented as follows:
+*PoissonImageEditing* is released under `LGPL` license, and can be used as both shared and static libraries. After building and installing *PoissonImageEditing*, you can include the header `PoissonImage.h` and link binary files in your own project. The basic usages of provided APIs are presented as follows:
 
 ```
 PoissonImage::PoissonImage(GradientScheme gradientSchm = GradientScheme::Maximum, DiffOp gradientOp = DiffOp::Backward, DiffOp divOp = DiffOp::Forward);
@@ -85,7 +85,7 @@ Instantiate and initialize the `PoissonImage` object. The three parameters vary 
 
 | Naive | Replace | Average | Maximum |
 |:--------------:|:--------------:|:----------------:|:----------------:|
-| ![Naive](/showcases/case1/naive.jpg?raw=true) | ![Replace](/showcases/case1/replace.jpg?raw=true) | ![Average](/showcases/case1/average.jpg?raw=true) | ![Maximum](/showcases/case1/maximum.jpg?raw=true) |
+| ![Naive](/showcases/case3/naive.jpg?raw=true) | ![Replace](/showcases/case3/replace.jpg?raw=true) | ![Average](/showcases/case3/average.jpg?raw=true) | ![Maximum](/showcases/case3/maximum.jpg?raw=true) |
 
 ```
 void PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::InputArray mask, const cv::Point& offset, cv::OutputArray output);
