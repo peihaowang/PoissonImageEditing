@@ -11,6 +11,8 @@ The following illustrations may give you an intuitive idea about Poisson image e
 | Naive | Poisson |
 |:--------------:|:--------------:|
 | ![Naive](/showcases/case0/naive.jpg?raw=true) | ![Poisson](/showcases/case0/result.png?raw=true) |
+| ![Naive](/showcases/case2/naive.jpg?raw=true) | ![Poisson](/showcases/case2/result.jpg?raw=true) |
+| ![Naive](/showcases/case3/naive.jpg?raw=true) | ![Poisson](/showcases/case3/result.jpg?raw=true) |
 
 ## Theory
 
@@ -89,7 +91,7 @@ Instantiate and initialize the `PoissonImage` object. The three parameters vary 
 void PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::InputArray mask, const cv::Point& offset, cv::OutputArray output);
 ```
 
-1. It requires input source and destination images as inputs and a target image on which output the final result.
+1. It requires source and destination images as inputs and a target image on which output the final result.
 
 2. Mask is provided to tell the algorithm rough boundaries of the objects in source image(Hence, their sizes should be the same).
 
@@ -97,7 +99,7 @@ void PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::Inp
 
 ## Executable
 
-The sample code can be compiled into a command-line utility, which has basic features to combine two images together. To run the executable properly, see the following usages:
+The sample code can be compiled into a command-line utility, which has basic features to seamlessly combine two images together. To run the executable properly, read the following usages:
 
 ```
 Usage: PoissonImageEditor <source-path> <destination-path> <output-path>
