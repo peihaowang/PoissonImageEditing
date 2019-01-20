@@ -19,12 +19,12 @@ Methods based on the manipulation of image gradients are a powerful tool for pro
 The idea proposed by P'erez et al. in 2003 mainly tells about an image processing techniques working on a gradient domain, taking advantage in simplicity and efficiency. Poisson editing theory plays a significant role in image combination algorithm, which is presented as follows:
 
 <!-- \[
-\min _{f} \iint_{\Omega} {\lvert \nabla f - v \rvert}^2 \ s.t.\ f \vert_{\partial \Omega} = f* \vert_{\partial \Omega}
+\min _{f} \iint_{\Omega} {\lvert \nabla f - \textbf{v} \rvert}^2 \ s.t.\ f \vert_{\partial \Omega} = f* \vert_{\partial \Omega}
 \] -->
 
-![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5Cmin%20_%7Bf%7D%20%5Ciint_%7B%5COmega%7D%20%7B%5Clvert%20%5Cnabla%20f%20-%20v%20%5Crvert%7D%5E2%20%5C%20s.t.%5C%20f%20%5Cvert_%7B%5Cpartial%20%5COmega%7D%20%3D%20f*%20%5Cvert_%7B%5Cpartial%20%5COmega%7D)
+![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5Cmin%20_%7Bf%7D%20%5Ciint_%7B%5COmega%7D%20%7B%5Clvert%20%5Cnabla%20f%20-%20%5Ctextbf%7Bv%7D%20%5Crvert%7D%5E2%20%5C%20s.t.%5C%20f%20%5Cvert_%7B%5Cpartial%20%5COmega%7D%20%3D%20f*%20%5Cvert_%7B%5Cpartial%20%5COmega%7D)
 
-where ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5COmega) is the target region, ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5Cpartial%20%5COmega) denotes the boundaries between the source and target regions. ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20f*) is the already known function that exists in the whole domain (i.e. the background), while ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20f) is defined as the unknown function on region ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5COmega). The solution of the equation must satisfy Euler-Largrange equation:
+where Ω is the target region, ∂Ω denotes the boundaries between the source and target regions. *f\** is the already known function that exists in the whole domain (i.e. the background), while *f* is defined as the unknown function on region ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5COmega). The solution of the equation must satisfy Euler-Largrange equation:
 
 <!-- \[
 \triangle f(x) = div(\textbf{v}(x)) \forall x \in \Omega, f \vert_{\partial \Omega} = f* \vert_{\partial \Omega}
@@ -32,7 +32,7 @@ where ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5COmega) is th
 
 ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5Ctriangle%20f%28x%29%20%3D%20div%28%5Ctextbf%7Bv%7D%28x%29%29%20%5Cforall%20x%20%5Cin%20%5COmega%2C%20f%20%5Cvert_%7B%5Cpartial%20%5COmega%7D%20%3D%20f*%20%5Cvert_%7B%5Cpartial%20%5COmega%7D)
 
-where ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20div%28%5Ctextbf%7Bv%7D%29%20%3D%20%5Cpartial%20v%20/%20%5Cpartial%20x%20&plus;%20%5Cpartial%20v%20/%20%5Cpartial%20y) <!--$div(\textbf{v}) = \partial v / \partial x + \partial v / \partial y$-->, which we usually take the discrete differential on the gradient field, and  ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5Ctriangle) is Laplacian operator in discrete case:
+where div(**v**) = ∂**v**/∂x + ∂**v**/∂y, which we usually take the discrete differential on the gradient field, and ▵ is Laplacian operator in discrete case:
 
 <!-- \[
 \mathcal{L}_z = \partial^2Z / \partial x^2 + \partial^2Z / \partial y^2 = -4Z_{x,y} + Z_{x+1,y} + Z_{x-1,y} + Z_{x,y+1} + Z_{x,y-1}
@@ -40,7 +40,7 @@ where ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20div%28%5Ctextbf
 
 ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5Cmathcal%7BL%7D_z%20%3D%20%5Cpartial%5E2Z%20/%20%5Cpartial%20x%5E2%20&plus;%20%5Cpartial%5E2Z%20/%20%5Cpartial%20y%5E2%20%3D%20-4Z_%7Bx%2Cy%7D%20&plus;%20Z_%7Bx&plus;1%2Cy%7D%20&plus;%20Z_%7Bx-1%2Cy%7D%20&plus;%20Z_%7Bx%2Cy&plus;1%7D%20&plus;%20Z_%7Bx%2Cy-1%7D)
 
-Apply Laplacian operator and differential operator over the unknown domain ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5COmega) and solve the linear equation with matrices to obtain the numerical solutions. More details are presented in the references.
+Apply Laplacian operator and differential operator over the unknown domain Ω and solve the linear equation with matrices to obtain the numerical solutions. More details are presented in the references.
 
 ## Installation
 
