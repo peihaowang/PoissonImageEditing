@@ -24,15 +24,15 @@ The idea proposed by P'erez et al. in 2003 mainly tells about an image processin
 
 ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5Cmin%20_%7Bf%7D%20%5Ciint_%7B%5COmega%7D%20%7B%5Clvert%20%5Cnabla%20f%20-%20%5Ctextbf%7Bv%7D%20%5Crvert%7D%5E2%20%5C%20s.t.%5C%20f%20%5Cvert_%7B%5Cpartial%20%5COmega%7D%20%3D%20f*%20%5Cvert_%7B%5Cpartial%20%5COmega%7D)
 
-where Ω is the target region, ∂Ω denotes the boundaries between the source and target regions. *f\** is the already known function that exists in the whole domain (i.e. the background), while *f* is defined as the unknown function on region ![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5COmega). The solution of the equation must satisfy Euler-Largrange equation:
+where Ω is the target region, ∂Ω denotes the boundaries between the source and target regions. *f\** is the already known function that exists in the whole domain (i.e. the background), while *f* is defined as the unknown function on region Ω. The solution of the equation must satisfy Euler-Largrange equation:
 
 <!-- \[
-\triangle f(x) = div(\textbf{v}(x)) \forall x \in \Omega, f \vert_{\partial \Omega} = f* \vert_{\partial \Omega}
+\triangle f(x) = div(\textbf{v}(x)), x \in \Omega  \hspace{0.5em} with \ f \vert_{\partial \Omega} = f* \vert_{\partial \Omega}
 \] -->
 
-![](https://latex.codecogs.com/svg.latex?%5Cdpi%7B100%7D%20%5Ctriangle%20f%28x%29%20%3D%20div%28%5Ctextbf%7Bv%7D%28x%29%29%20%5Cforall%20x%20%5Cin%20%5COmega%2C%20f%20%5Cvert_%7B%5Cpartial%20%5COmega%7D%20%3D%20f*%20%5Cvert_%7B%5Cpartial%20%5COmega%7D)
+![](https://latex.codecogs.com/svg.latex?%5Ctriangle%20f%28x%29%20%3D%20div%28%5Ctextbf%7Bv%7D%28x%29%29%2C%20x%20%5Cin%20%5COmega%20%5Chspace%7B0.5em%7D%20with%20%5C%20f%20%5Cvert_%7B%5Cpartial%20%5COmega%7D%20%3D%20f*%20%5Cvert_%7B%5Cpartial%20%5COmega%7D)
 
-where div(**v**) = ∂**v**/∂x + ∂**v**/∂y, which we usually take the discrete differential on the gradient field, and ▵ is Laplacian operator in discrete case:
+where div(**v**) = ∂**v**/∂x + ∂**v**/∂y, of which we usually take the discrete differential form on the gradient field, and ▵ is Laplacian operator in discrete case:
 
 <!-- \[
 \mathcal{L}_z = \partial^2Z / \partial x^2 + \partial^2Z / \partial y^2 = -4Z_{x,y} + Z_{x+1,y} + Z_{x-1,y} + Z_{x,y+1} + Z_{x,y-1}
@@ -44,7 +44,7 @@ Apply Laplacian operator and differential operator over the unknown domain Ω an
 
 ## Installation
 
-Before configure and compile *PoissonImageEditing*, you may need to setup the dependencies `OpenCV` and `Eigen3` first. Refer to [Installation in Windows](https://docs.opencv.org/3.4/d3/d52/tutorial_windows_install.html) or [Installation in Linux](https://docs.opencv.org/3.3.0/d7/d9f/tutorial_linux_install.html) for installation of `OpenCV`. As for `Eigen3`, it is much easier since it requires no build or compilation. You can simply download [Eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page), and unzip it into some directory which can be found by `CMake`.
+Before configure and compile *PoissonImageEditing*, you may need to setup the dependencies `OpenCV` and `Eigen3` first. Refer to [Installation for Windows](https://docs.opencv.org/3.4/d3/d52/tutorial_windows_install.html) or [Installation for Linux](https://docs.opencv.org/3.3.0/d7/d9f/tutorial_linux_install.html) for installation of `OpenCV`. As for `Eigen3`, it is much easier since it requires no build or compilation. You can simply download [Eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page), and unzip it into some directory which can be found by `CMake`.
 
 You may note that, here are some convenient package manager which could help you install them directly. After configure these dependencies, you can clone this repository by the following command:
 
