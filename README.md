@@ -2,7 +2,7 @@
 
 ## Introduction
 
-*PoissonImageEditing* implements a series of image processing algorithms based on Poisson editing theory, basically involves image seamless clone with two images as well as an arbitrary mask. Shared and static libraries are both provided along with an example program, which could be played around as an image blender.
+*PoissonImageEditing* implements a series of image processing algorithms based on Poisson editing theory, basically involves image seamless clone with two images as well as an arbitrary mask. Shared and static libraries are both provided, also along with an example program, which could be played around as an image blender.
 
 In *PoissonImageEditing*, images are initially loaded and processed with `cv::Mat`, and subsequently converted into matrix representation in `Eigen3`, which takes over all linear algebra computing and equation solving.
 
@@ -46,7 +46,7 @@ Apply Laplacian operator and differential operator over the unknown domain Ω an
 
 ## Installation
 
-Before configure and compile *PoissonImageEditing*, you may need to setup the dependencies `OpenCV` and `Eigen3` first. Refer to [Installation for Windows](https://docs.opencv.org/3.4/d3/d52/tutorial_windows_install.html) or [Installation for Linux](https://docs.opencv.org/3.3.0/d7/d9f/tutorial_linux_install.html) for installation of `OpenCV`. As for `Eigen3`, it is much easier since it requires no build or compilation. You can simply download [Eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page), and unzip it into some directory which can be found by `CMake`.
+Before configure and compile *PoissonImageEditing*, you may need to setup the dependencies `OpenCV` and `Eigen3` first. Refer to [Installation for Windows](https://docs.opencv.org/3.4/d3/d52/tutorial_windows_install.html) or [Installation for Linux](https://docs.opencv.org/3.3.0/d7/d9f/tutorial_linux_install.html) for installation of `OpenCV`. As for `Eigen3`, it is much easier since it requires no build or compilation. You can simply download [Eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page), and unzip it into somewhere able to be found by `CMake`.
 
 You may note that, here are some convenient package manager which could help you install them directly. After configure these dependencies, you can clone this repository by the following command:
 
@@ -65,7 +65,7 @@ make install
 
 Here are some troubleshoots you may need to pay attention:
 
-1. During configuring, dependency missing error may occur for `CMake` failes to find the installed library. The quickest way is to create `3rdparty/lib` directory under the project folder and then copy the corresponding library into it.
+1. During configuring, dependency missing errors may occur, for `CMake` failes to find the installed library. The quickest solution is to create `3rdparty/lib` directory under the project folder and then copy the corresponding library files into it.
 
 2. Upgrading `CMake` or compilers could be a good choice if there occurs wired issues while you are configuring or compiling the project.
 
@@ -75,13 +75,13 @@ Here are some troubleshoots you may need to pay attention:
 
 ### Library
 
-*PoissonImageEditing* is released under `LGPL` license, and can be used as both shared and static libraries. After building and installing *PoissonImageEditing*, you can include the header `PoissonImage.h` and link binary files in your own project. The basic usages of provided APIs are presented as follows:
+*PoissonImageEditing* is released under `LGPL` license. Both shared and static libraries are available for end users. After building and installing *PoissonImageEditing*, you could include the header `PoissonImage.h` and link binary files in your own project. The basic usages of provided APIs are presented as follows:
 
 ```
 PoissonImage::PoissonImage(GradientScheme gradientSchm = GradientScheme::Maximum, DiffOp gradientOp = DiffOp::Backward, DiffOp divOp = DiffOp::Forward);
 ```
 
-Instantiate and initialize the `PoissonImage` object. The three parameters vary the details algorithms slightly, where `Gradient Scheme` makes the greatest difference:
+Instantiate and initialize the `PoissonImage` object. These three parameters tweak some steps in the algorithm slightly, where `Gradient Scheme` makes the largest difference as shown below:
 
 | Naive | Replace | Average | Maximum |
 |:--------------:|:--------------:|:----------------:|:----------------:|
