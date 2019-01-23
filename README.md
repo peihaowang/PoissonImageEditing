@@ -12,7 +12,7 @@ The following illustrations may give you an intuitive idea about Poisson image e
 |:--------------:|:--------------:|
 | ![Naive](/showcases/case0/naive.jpg?raw=true) | ![Poisson](/showcases/case0/result.png?raw=true) |
 | ![Naive](/showcases/case1/naive.jpg?raw=true) | ![Poisson](/showcases/case1/result.jpg?raw=true) |
-| ![Naive](/showcases/case2/naive.jpg?raw=true) | ![Poisson](/showcases/case2/result.jpg?raw=true) |
+| ![Naive](/showcases/case4/naive.jpg?raw=true) | ![Poisson](/showcases/case4/result.jpg?raw=true) |
 
 ## Theory
 
