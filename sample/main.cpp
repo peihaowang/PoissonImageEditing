@@ -50,8 +50,7 @@ int main(int argc, char* argv[])
     }
 
     cv::Mat output;
-    PoissonImage PI(scheme, gradientOp, divOp);
-    PI.seamlessClone(src, dst, mask, offset, output);
+    PoissonImage::seamlessClone(src, dst, mask, offset, output, scheme, gradientOp, divOp);
     cv::imwrite(outputPath, output);
 
     return 0;

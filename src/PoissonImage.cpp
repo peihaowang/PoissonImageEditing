@@ -11,7 +11,7 @@ PoissonImage::PoissonImage(GradientScheme gradientSchm, DiffOp gradientOp, DiffO
     return;
 }
 
-cv::Mat PoissonImage::makeContinuous(const cv::Mat& m) const
+cv::Mat PoissonImage::makeContinuous(const cv::Mat& m)
 {
     if (!m.isContinuous()) {
         return m.clone();
@@ -204,57 +204,27 @@ void PoissonImage::poissonSolver(Eigen::MatrixXf& R, bool wholeSpace) const
     }
 }
 
-void PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::InputArray mask, const cv::Point& offset, cv::OutputArray output)
+void PoissonImage::seamlessClone(const cv::Mat& srcMat, const cv::Mat& dstMat, const cv::Mat& maskMat, cv::Mat& output)
 {
     StopWatch timer;
 
-    if(src.size() != mask.size()){
+    if(srcMat.size() != maskMat.size()){
         std::cerr << "The sizes of source and mask should be the same!" << std::endl;
         return;
     }
 
+    if(srcMat.size() != dstMat.size()){
+        std::cerr << "The sizes of source and destination should be the same!" << std::endl;
+        return;
+    }
+
     // Size
-    m_width = dst.cols();
-    m_height = dst.rows();
-
-    // Format check
-    if(src.type() != CV_8UC3){
-        std::cerr << "Format Check: The source mat have type: " << src.type() << ", but should have type: " << CV_8UC3 << std::endl;
-        return;
-    }
-    if(dst.type() != CV_8UC3){
-        std::cerr << "Format Check: The destination mat have type: " << dst.type() << ", but should have type: " << CV_8UC3 << std::endl;
-        return;
-    }
-    if(mask.type() != CV_8UC1){
-        std::cerr << "Format Check: The mask mat have type: " << mask.type() << ", but should have type: " << CV_8UC1 << std::endl;
-        return;
-    }
-
-    // Adjust the position of the src image and mask
-    cv::Mat srcMat = cv::Mat::zeros(m_height, m_width, CV_8UC3);
-    cv::Mat maskMat = cv::Mat::zeros(m_height, m_width, CV_8UC1);
-    cv::Mat dstMat = dst.getMat();
-    {
-        int left = (src.cols()/2) - offset.x - (m_width/2); if(left < 0) left = 0;
-        int right = (src.cols()/2) - offset.x + (m_width/2); if(right >= src.cols()) right = src.cols() - 1;
-        int top = (src.rows()/2) - offset.y - (m_height/2); if(top < 0) top = 0;
-        int bottom = (src.rows()/2) - offset.y + (m_height/2); if(bottom >= src.rows()) bottom = src.rows() - 1;
-        cv::Rect rcSrc(left, top, right - left, bottom - top);
-        cv::Point center = cv::Point(m_width / 2, m_height / 2) + offset + cv::Point((left + right) / 2, (top + bottom) / 2) - cv::Point(src.cols() / 2, src.rows() / 2);
-        cv::Rect rcDst(center.x - rcSrc.width/2, center.y - rcSrc.height/2, rcSrc.width, rcSrc.height);
-        src.getMat()(rcSrc).copyTo(srcMat(rcDst));
-        mask.getMat()(rcSrc).copyTo(maskMat(rcDst));
-    }
-
-    // Make input data compact
-    srcMat = makeContinuous(srcMat);
-    dstMat = makeContinuous(dstMat);
-    maskMat = makeContinuous(maskMat);
+    m_width = dstMat.cols;
+    m_height = dstMat.rows;
 
     // Initialize eigen matrices
-    m_srcImage = std::move(Eigen::MatrixXf(m_width * m_height, src.channels()));
-    m_dstImage = std::move(Eigen::MatrixXf(m_width * m_height, dst.channels()));
+    m_srcImage = std::move(Eigen::MatrixXf(m_width * m_height, srcMat.channels()));
+    m_dstImage = std::move(Eigen::MatrixXf(m_width * m_height, dstMat.channels()));
     m_maskMap = std::move(Eigen::Matrix<unsigned char, Eigen::Dynamic, 1>(m_width * m_height, 1));
 
     // Convert cv mat into eigen mat
@@ -284,9 +254,9 @@ void PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::Inp
                 Eigen::MatrixXf srcGradX = Dx * m_srcImage, srcGradY = Dy * m_srcImage;
                 Eigen::MatrixXf dstGradX = Dx * m_dstImage, dstGradY = Dy * m_dstImage;
 
-                m_gradientX = std::move(Eigen::MatrixXf(m_width * m_height, src.channels()));
-                m_gradientY = std::move(Eigen::MatrixXf(m_width * m_height, src.channels()));
-                for(int x = 0; x < src.channels(); x++){
+                m_gradientX = std::move(Eigen::MatrixXf(m_width * m_height, srcMat.channels()));
+                m_gradientY = std::move(Eigen::MatrixXf(m_width * m_height, srcMat.channels()));
+                for(int x = 0; x < srcMat.channels(); x++){
                     for(int y = 0; y < m_width * m_height; y++){
                         float srcGx = srcGradX(y, x), srcGy = srcGradY(y, x);
                         float dstGx = dstGradX(y, x), dstGy = dstGradY(y, x);
@@ -307,9 +277,58 @@ void PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::Inp
 
     Eigen::MatrixXf R;
     poissonSolver(R, true);
+    eigenMat2CvMat(R, output);
 
-    timer.tick("Poisson Solve");
+    timer.tick("Poisson Solving");
+}
 
-    cv::Mat outputMat; eigenMat2CvMat(R, outputMat);
+void PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::InputArray mask, const cv::Point& offset, cv::OutputArray output, GradientScheme gradientSchm, DiffOp gradientOp, DiffOp divOp)
+{
+    if(src.size() != mask.size()){
+        std::cerr << "The sizes of source and mask should be the same!" << std::endl;
+        return;
+    }
+
+    // Size
+    int w = dst.cols();
+    int h = dst.rows();
+
+    // Format check
+    if(src.type() != CV_8UC3){
+        std::cerr << "Format Check: The source mat have type: " << src.type() << ", but should have type: " << CV_8UC3 << std::endl;
+        return;
+    }
+    if(dst.type() != CV_8UC3){
+        std::cerr << "Format Check: The destination mat have type: " << dst.type() << ", but should have type: " << CV_8UC3 << std::endl;
+        return;
+    }
+    if(mask.type() != CV_8UC1){
+        std::cerr << "Format Check: The mask mat have type: " << mask.type() << ", but should have type: " << CV_8UC1 << std::endl;
+        return;
+    }
+
+    // Adjust the position of the src image and mask
+    cv::Mat srcMat = cv::Mat::zeros(h, w, CV_8UC3);
+    cv::Mat maskMat = cv::Mat::zeros(h, w, CV_8UC1);
+    cv::Mat dstMat = dst.getMat();
+    {
+        int left = (src.cols()/2) - offset.x - (w/2); if(left < 0) left = 0;
+        int right = (src.cols()/2) - offset.x + (w/2); if(right >= src.cols()) right = src.cols() - 1;
+        int top = (src.rows()/2) - offset.y - (h/2); if(top < 0) top = 0;
+        int bottom = (src.rows()/2) - offset.y + (h/2); if(bottom >= src.rows()) bottom = src.rows() - 1;
+        cv::Rect rcSrc(left, top, right - left, bottom - top);
+        cv::Point center = cv::Point(w / 2, h / 2) + offset + cv::Point((left + right) / 2, (top + bottom) / 2) - cv::Point(src.cols() / 2, src.rows() / 2);
+        cv::Rect rcDst(center.x - rcSrc.width/2, center.y - rcSrc.height/2, rcSrc.width, rcSrc.height);
+        src.getMat()(rcSrc).copyTo(srcMat(rcDst));
+        mask.getMat()(rcSrc).copyTo(maskMat(rcDst));
+    }
+
+    // Make input data compact
+    srcMat = makeContinuous(srcMat);
+    dstMat = makeContinuous(dstMat);
+    maskMat = makeContinuous(maskMat);
+
+    PoissonImage PI(gradientSchm, gradientOp, divOp);
+    cv::Mat outputMat; PI.seamlessClone(srcMat, dstMat, maskMat, outputMat);
     outputMat.copyTo(output);
 }

@@ -48,7 +48,7 @@ protected:
 
 protected:
 
-    cv::Mat makeContinuous(const cv::Mat& m) const;
+    static cv::Mat makeContinuous(const cv::Mat& m);
 
     template<typename T, int RowNum, int ColNum>
     void cvMat2EigenMat(const cv::Mat& cvMat, Eigen::Matrix<T, RowNum, ColNum>& eigenMat);
@@ -65,12 +65,14 @@ protected:
 
     void poissonSolver(Eigen::MatrixXf& R, bool wholeSpace = false) const;
 
-public:
-
     PoissonImage(GradientScheme gradientSchm = GradientScheme::Maximum, DiffOp gradientOp = DiffOp::Backward, DiffOp divOp = DiffOp::Forward);
     virtual ~PoissonImage() { return; }
 
-    void seamlessClone(cv::InputArray src, cv::InputArray dst, cv::InputArray mask, const cv::Point& offset, cv::OutputArray output);
+    void seamlessClone(const cv::Mat& srcMat, const cv::Mat& dstMat, const cv::Mat& maskMat, cv::Mat& output);
+
+public:
+
+    static void seamlessClone(cv::InputArray src, cv::InputArray dst, cv::InputArray mask, const cv::Point& offset, cv::OutputArray output, GradientScheme gradientSchm = GradientScheme::Maximum, DiffOp gradientOp = DiffOp::Backward, DiffOp divOp = DiffOp::Forward);
 
 };
 
