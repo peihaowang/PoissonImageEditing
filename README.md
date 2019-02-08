@@ -16,7 +16,7 @@ The following illustrations may give you an intuitive idea about Poisson image e
 
 ## Theory
 
-Methods based on the manipulation of image gradients are a powerful tool for processing or combining images. For example operations such as seamless cloning, local illumination changes, texture flatten- ing or seamless tiling can be performed in a very simple and efficient way by combining/modifying the image gradients.
+Methods based on the manipulation of image gradients are a powerful tool for processing or combining images. For example operations such as seamless cloning, local illumination changes, texture flattening or seamless tiling can be performed in a very simple and efficient way by combining/modifying the image gradients.
 
 The idea proposed by P'erez et al. in 2003 mainly tells about an image processing techniques working on a gradient domain, taking advantage in simplicity and efficiency. Poisson editing theory plays a significant role in image combination algorithm, which is presented as follows:
 
