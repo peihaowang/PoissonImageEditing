@@ -97,7 +97,7 @@ The other two parameters specifies which kind of discrete differential operator 
 
 ## Executable
 
-The sample code can be compiled into a command-line utility, which has basic features to seamlessly combine two images together. To run the executable properly, read the following usages:
+The sample code can be compiled into a command-line utility, which has basic features to seamlessly combine two images together. To run the executable appropriately, read the following usages please:
 
 ```
 Usage: PoissonImageEditor <source-path> <destination-path> <output-path>
