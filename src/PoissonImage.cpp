@@ -106,7 +106,7 @@ void PoissonImage::projectionEdge(Eigen::SparseMatrix<float, Eigen::RowMajor>& E
     m.swap(E);
 }
 
-void PoissonImage::projectionSimpler(Eigen::SparseMatrix<float, Eigen::RowMajor>& S) const
+void PoissonImage::projectionSampler(Eigen::SparseMatrix<float, Eigen::RowMajor>& S) const
 {
     std::vector<Eigen::Triplet<float>> triplets;
     for(int x = 0; x < m_width; x++){
@@ -191,7 +191,7 @@ void PoissonImage::diffOperator(Eigen::SparseMatrix<float, Eigen::RowMajor>& Dx,
 void PoissonImage::poissonSolver(Eigen::MatrixXf& R, bool wholeSpace) const
 {
     Eigen::SparseMatrix<float, Eigen::RowMajor> L, M, E, S, ST, Dx, Dy;
-    laplacianOperator(L); projectionMask(M); projectionEdge(E); projectionSimpler(S); ST = S.transpose(); diffOperator(Dx, Dy, m_divOperator);
+    laplacianOperator(L); projectionMask(M); projectionEdge(E); projectionSampler(S); ST = S.transpose(); diffOperator(Dx, Dy, m_divOperator);
     Eigen::SparseMatrix<float> A = S * L * M * ST;
     Eigen::MatrixXf b = S * (Dx * m_gradientX + Dy * m_gradientY - L * E * m_dstImage);
 

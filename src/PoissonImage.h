@@ -60,7 +60,7 @@ protected:
     void laplacianOperator(Eigen::SparseMatrix<float, Eigen::RowMajor>& L) const;
     void projectionMask(Eigen::SparseMatrix<float, Eigen::RowMajor>& M) const;
     void projectionEdge(Eigen::SparseMatrix<float, Eigen::RowMajor>& E) const;
-    void projectionSimpler(Eigen::SparseMatrix<float, Eigen::RowMajor>& S) const;
+    void projectionSampler(Eigen::SparseMatrix<float, Eigen::RowMajor>& S) const;
     void diffOperator(Eigen::SparseMatrix<float, Eigen::RowMajor>& Dx, Eigen::SparseMatrix<float, Eigen::RowMajor>& Dy, DiffOp op) const;
 
     void poissonSolver(Eigen::MatrixXf& R, bool wholeSpace = false) const;

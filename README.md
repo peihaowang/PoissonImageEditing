@@ -106,6 +106,6 @@ Usage: PoissonImageEditor <source-path> <destination-path> <output-path>
 
 ## References
 
-1. Pérez, Patrick, Michel Gangnet, and Andrew Blake. "Poisson image editing." ACM Transactions on Graphics (TOG). Vol. 22. No. 3. ACM, 2003.
+1. [Pérez, Patrick, Michel Gangnet, and Andrew Blake. "Poisson image editing." ACM Transactions on Graphics (TOG). Vol. 22. No. 3. ACM, 2003.](https://dl.acm.org/citation.cfm?id=882269)
 2. ["Poisson Image Editing", J. Matías Di Martino, Gabriele Facciolo, Enric Meinhardt-Llopis](http://www.ipol.im/pub/art/2016/163/)
 3. [Poisson Blending - Eric Yuan's Blog](http://eric-yuan.me/poisson-blending/)
