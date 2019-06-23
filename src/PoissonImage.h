@@ -42,7 +42,7 @@ public:
 public:
 
     static bool seamlessClone(cv::InputArray src, cv::InputArray dst, cv::InputArray mask
-        , const cv::Point& offset, cv::OutputArray output, PerfMetric* perfMetric = NULL
+        , const cv::Point& offset, cv::OutputArray output, PerfMetric* perfMetric = nullptr
         , GradientScheme gradientSchm = GradientScheme::Maximum
         , DiffOp gradientOp = DiffOp::Backward
         , DiffOp divOp = DiffOp::Forward

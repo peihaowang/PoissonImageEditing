@@ -78,7 +78,12 @@ Here are some troubleshoots you may need to pay attention:
 *PoissonImageEditing* is released under `LGPL` license. Both shared and static libraries are available for end users. After building and installing *PoissonImageEditing*, you could include the header `PoissonImage.h` and link binary files in your own project. The basic usages of provided APIs are presented as follows:
 
 ```
-void PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::InputArray mask, const cv::Point& offset, cv::OutputArray output,  GradientScheme gradientSchm = GradientScheme::Maximum, DiffOp gradientOp = DiffOp::Backward, DiffOp divOp = DiffOp::Forward);
+bool PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::InputArray mask
+        , const cv::Point& offset, cv::OutputArray output, PerfMetric* perfMetric = nullptr
+        , GradientScheme gradientSchm = GradientScheme::Maximum
+        , DiffOp gradientOp = DiffOp::Backward
+        , DiffOp divOp = DiffOp::Forward
+);
 ```
 
 1. It requires source and destination images as inputs and a target image on which output the final result.
@@ -87,7 +92,9 @@ void PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::Inp
 
 3. The source image is initially put on the center of the destination image, but offset means that it is possible to move the source objects on the destination canvas by giving a translation.
 
-4. The last three parameters tweak some steps in the algorithm slightly, where `Gradient Scheme` makes the largest difference as shown below:
+4. The retriever of performance metric is an optional parameter, which measures the running time of each stage in the algorithm. Leave the pointer null to ignore the performance metric.
+
+5. The last three parameters tweak some steps in the algorithm slightly, where `Gradient Scheme` makes the largest difference as shown below:
 
 | Naive | Replace | Average | Maximum |
 |:--------------:|:--------------:|:----------------:|:----------------:|
