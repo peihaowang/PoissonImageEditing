@@ -16,10 +16,12 @@ public:
     double escapeTime() const { return (double)(std::clock() - m_lastTime) / CLOCKS_PER_SEC; }
     double totalTime() const { return (double)(std::clock() - m_startTime) / CLOCKS_PER_SEC; }
 
-    void tick(const char* title)
+    double tick(const char* title = NULL)
     {
-        std::cout << title << ": " << escapeTime() << "s" << std::endl;
+        double t = escapeTime();
+        if(title) std::cout << title << ": " << t << "s" << std::endl;
         m_lastTime = std::clock();
+        return t;
     }
 
 };

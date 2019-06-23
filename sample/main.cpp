@@ -1,12 +1,9 @@
-
 #include <iostream>
 
 #include "PoissonImage.h"
 
 int main(int argc, char* argv[])
 {
-    std::cout << "Poisson Image Editing ..." << std::endl;
-
     if(argc < 4){
         std::cout << "Compulsory arguments are missing ..." << std::endl;
         std::cout << "Usage: PoissonImageEditor <source-path> <destination-path> <output-path> \n"
@@ -15,6 +12,8 @@ int main(int argc, char* argv[])
                   ;
         return 0;
     }
+
+    std::cout << "Poisson Image Editing ..." << std::endl;
 
     cv::Mat src = cv::imread(argv[1]);
     cv::Mat dst = cv::imread(argv[2]);
@@ -50,8 +49,16 @@ int main(int argc, char* argv[])
     }
 
     cv::Mat output;
-    PoissonImage::seamlessClone(src, dst, mask, offset, output, scheme, gradientOp, divOp);
-    cv::imwrite(outputPath, output);
+    PoissonImage::PerfMetric perf;
+    if(PoissonImage::seamlessClone(src, dst, mask, offset, output, &perf, scheme, gradientOp, divOp)){
+        cv::imwrite(outputPath, output);
+
+        std::cout << "Initialization: " << perf.m_tInit << "s" << std::endl;
+        std::cout << "Calculate Gradient: " << perf.m_tGradient << "s" << std::endl;
+        std::cout << "Poisson Solving: " << perf.m_tSolver << "s" << std::endl;
+    }else{
+        std::cerr << "Failed to run Poisson image editing." << std::endl;
+    }
 
     return 0;
 }

@@ -2,6 +2,7 @@
 add_library(POISSON_IMAGE_SHARED
 	SHARED
     PoissonImage.cpp
+    PoissonImageImpl.cpp
 )
 
 set_target_properties(POISSON_IMAGE_SHARED PROPERTIES OUTPUT_NAME PoissonImage)
@@ -17,6 +18,7 @@ target_link_libraries(POISSON_IMAGE_SHARED
 add_library(POISSON_IMAGE_STATIC
 	STATIC
     PoissonImage.cpp
+    PoissonImageImpl.cpp
 )
 
 set_target_properties(POISSON_IMAGE_STATIC PROPERTIES OUTPUT_NAME PoissonImage)
