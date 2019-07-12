@@ -68,7 +68,10 @@ bool PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::Inp
         return false;
     }
 
-    outputMat.copyTo(output);
+    // 2019.7.13 Bugfix to float-pointing matrix. Thanks to ZHAO
+    // Since the cv::imshow only present normalized float matrix
+    // normally, we need to return the matrix of byte type.
+    outputMat.convertTo(output, CV_8U);
     
     // Fill out the perfermance metric
     if (perfMetric){
