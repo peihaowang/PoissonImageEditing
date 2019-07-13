@@ -94,11 +94,9 @@ bool PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::Inp
 3. The source image is initially put on the center of the destination image, but offset means that it is possible to move the source objects on the destination canvas by giving a translation.
 
 4. The following three parameters tweak several steps in the algorithm slightly, where `Gradient Scheme` specifies the blending policy to the gradient fields of source and destination images, whose differences as shown below:
-
 | Naive | Replace | Average | Maximum |
 |:--------------:|:--------------:|:----------------:|:----------------:|
 | ![Naive](/showcases/case3/naive.jpg?raw=true) | ![Replace](/showcases/case3/replace.jpg?raw=true) | ![Average](/showcases/case3/average.jpg?raw=true) | ![Maximum](/showcases/case3/maximum.jpg?raw=true) |
-
 The other two parameters specifies which discrete differential operator will be taken for gradient field and `div` operator respectively.
 
 5. The retriever of performance metric is an optional parameter, which measures the running time of each stage in the algorithm. Leave the pointer null to ignore the performance metric.
