@@ -99,7 +99,7 @@ bool PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::Inp
 |:--------------:|:--------------:|:----------------:|:----------------:|
 | ![Naive](/showcases/case3/naive.jpg?raw=true) | ![Replace](/showcases/case3/replace.jpg?raw=true) | ![Average](/showcases/case3/average.jpg?raw=true) | ![Maximum](/showcases/case3/maximum.jpg?raw=true) |
 
-    The other two parameters specifies which discrete differential operator will be taken for gradient field and `div` operator respectively.
+The other two parameters specifies which discrete differential operator will be taken for gradient field and `div` operator respectively.
 
 5. The retriever of performance metric is an optional parameter, which measures the running time of each stage in the algorithm. Leave the pointer null to ignore the performance metric.
 
