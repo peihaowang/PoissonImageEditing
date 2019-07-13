@@ -4,7 +4,7 @@
 #include "PoissonImage.h"
 
 bool PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::InputArray mask, const cv::Point& offset
-    , cv::OutputArray output, PerfMetric* perfMetric, GradientScheme gradientSchm, DiffOp gradientOp, DiffOp divOp
+    , cv::OutputArray output, GradientScheme gradientSchm, DiffOp gradientOp, DiffOp divOp, PerfMetric* perfMetric
 ) {
     if (src.size() != mask.size())
     {

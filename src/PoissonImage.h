@@ -42,10 +42,11 @@ public:
 public:
 
     static bool seamlessClone(cv::InputArray src, cv::InputArray dst, cv::InputArray mask
-        , const cv::Point& offset, cv::OutputArray output, PerfMetric* perfMetric = nullptr
+        , const cv::Point& offset, cv::OutputArray output
         , GradientScheme gradientSchm = GradientScheme::Maximum
         , DiffOp gradientOp = DiffOp::Backward
         , DiffOp divOp = DiffOp::Forward
+        , PerfMetric* perfMetric = nullptr
     );
 
 };
