@@ -18,7 +18,7 @@ The following illustrations may give you an intuitive idea about Poisson image e
 
 Methods based on the manipulation of image gradients are a powerful tool for processing or combining images. For example operations such as seamless cloning, local illumination changes, texture flattening or seamless tiling can be performed in a very simple and efficient way by combining/modifying the image gradients.
 
-The idea proposed by P'erez et al. in 2003 mainly tells about an image processing techniques working on a gradient domain, taking advantage in simplicity and efficiency. Poisson editing theory plays a significant role in image combination algorithm, which is presented as follows:
+The idea proposed by P'erez et al. in 2003 mainly tells about an image processing techniques working on a gradient domain, taking advantage in simplicity and efficiency. Poisson editing theory plays a significant role in image fusion algorithm, which is presented as follows:
 
 <!-- \[
 \min _{f} \iint_{\Omega} {\lvert \nabla f - \textbf{v} \rvert}^2 \ s.t.\ f \vert_{\partial \Omega} = f* \vert_{\partial \Omega}
@@ -26,7 +26,7 @@ The idea proposed by P'erez et al. in 2003 mainly tells about an image processin
 
 ![](https://latex.codecogs.com/svg.latex?%5Cmin%20_%7Bf%7D%20%5Ciint_%7B%5COmega%7D%20%7B%5Clvert%20%5Cnabla%20f%20-%20%5Ctextbf%7Bv%7D%20%5Crvert%7D%5E2%20%5C%20with%5C%20f%20%5Cvert_%7B%5Cpartial%20%5COmega%7D%20%3D%20f%5E*%20%5Cvert_%7B%5Cpartial%20%5COmega%7D)
 
-where Ω is the target region, ∂Ω denotes the boundaries between the source and target regions. *f\** is the already known function that exists in the whole domain (i.e. the background), while *f* is defined as the unknown function on region Ω. The solution of the equation must satisfy Euler-Largrange equation:
+where Ω is the target region, ∂Ω denotes the boundaries between the source and target regions. *f\** is the given function defined on the entire domain (aka. the background), **v** represents its graident vector, while *f* is defined as the unknown function on region Ω. The solution of the equation must satisfy Euler-Largrange equation:
 
 <!-- \[
 \triangle f(x) = div(\textbf{v}(x)), x \in \Omega  \hspace{0.5em} with \ f \vert_{\partial \Omega} = f^* \vert_{\partial \Omega}
