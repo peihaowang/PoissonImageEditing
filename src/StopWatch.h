@@ -3,7 +3,7 @@
 #define STOP_WATCH_H
 
 #include <iostream>
-#include <time.h>
+#include <ctime>
 
 class StopWatch
 {
