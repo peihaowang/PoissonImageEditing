@@ -101,7 +101,7 @@ bool PoissonImage::seamlessClone(cv::InputArray src, cv::InputArray dst, cv::Inp
 
 5. The retriever of performance metric is an optional parameter, which measures the running time of each stage in the algorithm. Leave the pointer null to ignore the performance metric.
 
-## Executable
+### Executable
 
 The sample code can be compiled into a command-line utility, which has basic features to seamlessly combine two images together. To run the executable appropriately, read the following usages please:
 
